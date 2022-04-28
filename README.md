@@ -1,2 +1,2 @@
-# Circuito_Electronico
+# Circuito_Electronico.
 DIVISOR DE TENSION BJT
