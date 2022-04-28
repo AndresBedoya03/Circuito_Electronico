@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+    <head>        
+        <title>Circuitos en AC</title>
+        <link rel="icon" href="imagenes/BJT.png" >
+        <style>
+            #blanco{color: white; font-size:35px;border-radius:5px;padding:10px}
+            .centrado{text-align: center;margin-top: 10px;margin-bottom: 20px}            
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="responsive.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css3.css" >        
+        <script src="math.js" type="text/javascript"></script>
+        <!--<script type="text/javascript" src="todojs.js"></script>-->
+                  
+    </head>
+    <body class="fondo2">
+        <script src="vendor/jquery-2.1.4.min.js"></script>
+        <script src="responsive.min.js"></script>
+        <header>
+            <h1 style="text-align: center">BJT divisor de tension</h1>
+        </header>
+        
+        <img id="img4" src="imagenes/descarga.png" width='450' height='400' title='SERIE'>
+               
+        <div id="R1">
+            R1= <input type="text" id="Ohm1" size="5" value="1"> 
+        </div>
+        <div id="R2">
+            R2= <input type="text" id="Ohm2" size="5" value="1"> 
+        </div>
+        <div id="Rc">
+            Rc= <input type="text" id="Ohm3" size="5" value="1"> 
+        </div>
+        <div id="Re">
+            Re= <input type="text" id="Ohm4" size="5" value="1"> 
+        </div>
+
+        <div id="Vb">
+            Vb= <input type="text" id="Vbe" size="5" value="0.7"> 
+        </div>
+
+        <div id="VCC">
+            VCC= <input type="text" id="Vcc" size="5" value="1"> 
+        </div>
+
+        <div id="B">
+            Beta= <input type="text" id="Beta" size="5" value="1"> 
+        </div>
+        
+            <input type="button" value="Calcular"  id="result" >
+        
+        <div id="resultado"></div> 
+        <a href="index.html" id="img5">
+          <img src="imagenes/atras2.png" width='50' height='50' title=' Volver a Inicio'>
+        </a>  
+       
+        
+        <script> 
+            document.getElementById("result").onclick= function(){
+            //alert("Esto si funciona");
+            var R1= document.getElementById('Ohm1').value;
+            var R2= document.getElementById('Ohm2').value;
+            var Rc= document.getElementById('Ohm3').value;
+            var Re= document.getElementById('Ohm4').value;
+            var VBE= document.getElementById('Vbe').value;
+            var B= document.getElementById('Beta').value;
+            var VCC= document.getElementById('Vcc').value;
+          
+            
+            var Rth= (parseFloat(R1)*parseFloat(R2))/(parseFloat(R1)+parseFloat(R2));
+                                 
+            var Vth= ((parseFloat(R2)*parseFloat(VCC))/(parseFloat(R1) + parseFloat(R2)));
+            text="<br/> El voltaje Thevenin es: " + math.abs(Vth.toFixed(3)) + " V";
+           
+           var Ib=((parseFloat(Vth)-parseFloat(VBE))/(Rth+(parseFloat(B)+1)*Re));
+            text=text+"<br/> La corriente de base es: " + (Ib.toFixed(6)) + " A";
+            
+            var Ic= (parseFloat(B)*parseFloat(Ib));
+            text=text+"<br/> La corriente de Colector es: " + (Ic.toFixed(4)) + " A"; 
+            
+            var Vce= parseFloat(VCC) - (parseFloat(Ic)*(parseFloat(Rc)+ parseFloat(Re))); 
+            text=text+"<br/> El voltaje CE es: " + (Vce).toFixed(3) + "V";
+            
+            document.getElementById('resultado').innerHTML= text;
+    
+            };
+                
+           
+        </script>   
+        
+
+    </body>
+</html>
